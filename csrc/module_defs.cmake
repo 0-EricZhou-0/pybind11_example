@@ -11,23 +11,6 @@ set(PYBIND11_MODULE_NAME libmodule)
 # find_package(CUDAToolkit REQUIRED ${CUDA_TOOLKIT_VERSION} COMPONENTS cupti nvml)
 find_package(Python3 REQUIRED COMPONENTS Interpreter Development)
 
-# # protobuf compilation
-# file(GLOB PROTO_SOURCES ${RESOURCES_DIR}/proto/*.proto)
-# proto_compile(PYBIND11_MODULE_PROTO_DEP
-#     SOURCE_DIR   ${RESOURCES_DIR}/proto
-#     CXX_DEST_DIR ${CMAKE_CURRENT_LIST_DIR}/generated/proto
-#     PY_DEST_DIR  ${PYTHON_SRC_DIR}/proto
-#     GEN_SOURCES  PROTO_SOURCES
-#     SOURCES      ${PROTO_SOURCES}
-# )
-
-# # get generated cxx source files
-# set(PROTO_CC_SOURCES ${PROTO_SOURCES})
-# list(FILTER PROTO_CC_SOURCES INCLUDE REGEX "\\.cc$")
-# # get generated python source files
-# set(PROTO_PY_SOURCES ${PROTO_SOURCES})
-# list(FILTER PROTO_PY_SOURCES INCLUDE REGEX "\\.py$")
-
 # === determine [PYBIND11_MODULE_INTERFACE_SOURCE] ===
 set(PYBIND11_MODULE_INTERFACE_SOURCE ${CMAKE_CURRENT_LIST_DIR}/src/pybind11_interface.cc)
 set(PYBIND11_GENERATED_INTERFACE_HEADER ${CMAKE_CURRENT_LIST_DIR}/generated/interface/pybind11_defs.h)
@@ -49,9 +32,6 @@ set(PYBIND11_MODULE_DEPENDS
     # CUDA libraries
     # CUDA::cupti
     # CUDA::nvml
-    # protobuf and absl libraries
-    protobuf::libprotobuf
-    absl::log
 )
 
 
@@ -68,6 +48,4 @@ set(PYBIND11_MODULE_INCLUDES
     # ${TORCH_INCLUDES}
     # cuda
     # ${CUDAToolkit_INCLUDE_DIRS}
-    # protobuf
-    ${Protobuf_INCLUDE_DIRS}
 )
